@@ -3,230 +3,1497 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Business Analytics Portfolio</title>
+    <title>Alek Blain-Rogers — Analytics Portfolio</title>
+    <meta name="description" content="Portfolio of Alek Blain-Rogers — McGill MMA candidate specializing in analytics, ERP systems, and data visualization." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
     <style>
-      /* ============================================================
-       BASIC STYLES — students can tweak colors/fonts here
-       ============================================================ */
+    
+      :root {
+        --forest-950: #081b12;
+        --forest-900: #0e2a1c;
+        --forest-800: #143d28;
+        --forest-700: #1c5236;
+        --forest-600: #246b45;
+        --forest-500: #2f8657;
+        --forest-400: #48a06d;
+        --forest-100: #e5f1e8;
+        --gold: #b6893f;
+        --cream: #f7faf6;
+        --white: #ffffff;
+        --ink: #142019;
+        --muted: #5c6b62;
+        --border: #dfe8e1;
+        --shadow: 0 10px 30px rgba(10, 40, 25, 0.08);
+        --shadow-lg: 0 20px 50px rgba(10, 40, 25, 0.16);
+      }
+
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
-        font-family: Arial, Helvetica, sans-serif;
-        color: #222;
-        background: #f7f7f7;
-        line-height: 1.5;
+        font-family: "Inter", Arial, Helvetica, sans-serif;
+        color: var(--ink);
+        background: var(--cream);
+        line-height: 1.6;
+        overflow-x: hidden;
       }
 
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 40px 20px;
+      h1, h2, h3, .brand {
+        font-family: "Space Grotesk", "Inter", sans-serif;
+        letter-spacing: -0.01em;
       }
 
-      /* ---------- HEADER (photo + name + subheading) ---------- */
-      header {
-        text-align: center;
-        margin-bottom: 30px;
+      a {
+        color: inherit;
+        text-decoration: none;
       }
 
-      /* Empty space for photo — replace with your own <img> if you like */
-      .photo {
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
-        background: #ddd;
-        border: 2px dashed #aaa;
-        margin: 0 auto 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #888;
-        font-size: 13px;
-      }
-
-      header h1 {
-        font-size: 28px;
-        margin-bottom: 6px;
-      } /* NAME */
-      header p {
-        font-size: 16px;
-        color: #555;
-      } /* EXPERIENCES */
-
-      /* ---------- TABS ---------- */
-      .tabs {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 24px;
-      }
-
-      .tab-button {
-        padding: 10px 22px;
-        border: 1px solid #ccc;
-        background: #fff;
-        cursor: pointer;
-        font-size: 15px;
-        border-radius: 4px;
-      }
-
-      .tab-button.active {
-        background: #2c3e50;
-        color: #fff;
-        border-color: #2c3e50;
-      }
-
-      /* ---------- TAB CONTENT ---------- */
-      .tab-content {
-        display: none;
-      }
-      .tab-content.active {
+      img {
+        max-width: 100%;
         display: block;
       }
 
-      .panel {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 6px;
-        padding: 24px;
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
       }
 
-      /* ---------- PROJECT CARDS (1 x 3 grid) ---------- */
-      .cards {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+      section {
+        padding: 90px 0;
       }
 
-      .card {
-        border: 1px solid #eee;
-        border-radius: 6px;
+      .eyebrow {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--forest-600);
+        background: var(--forest-100);
+        padding: 6px 14px;
+        border-radius: 999px;
+        margin-bottom: 16px;
+      }
+
+      .section-title {
+        font-size: clamp(26px, 4vw, 34px);
+        font-weight: 700;
+        color: var(--forest-900);
+        margin-bottom: 10px;
+      }
+
+      .section-sub {
+        color: var(--muted);
+        max-width: 640px;
+        margin-bottom: 44px;
+      }
+
+      /*scroll and reveal*/
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /*Navigation*/
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        background: rgba(8, 27, 18, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        color: var(--white);
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: 0.02em;
+      }
+      .brand span {
+        color: var(--forest-400);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 8px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 14px;
+        border-radius: 999px;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+      }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+      }
+      .nav-toggle span {
+        width: 24px;
+        height: 2px;
+        background: var(--white);
+        border-radius: 2px;
+      }
+
+      @media (max-width: 780px) {
+        .nav-links {
+          position: fixed;
+          top: 60px;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          background: var(--forest-950);
+          padding: 12px 24px 20px;
+          gap: 4px;
+          transform: translateY(-140%);
+          transition: transform 0.3s ease;
+        }
+        .nav-links.open {
+          transform: translateY(0);
+        }
+        .nav-links a {
+          padding: 12px 14px;
+        }
+        .nav-toggle {
+          display: flex;
+        }
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-top: 90px;
+        background:
+          radial-gradient(circle at 85% 15%, rgba(72, 160, 109, 0.35), transparent 55%),
+          radial-gradient(circle at 10% 90%, rgba(182, 137, 63, 0.18), transparent 45%),
+          linear-gradient(160deg, var(--forest-950), var(--forest-800) 60%, var(--forest-700));
+        position: relative;
         overflow: hidden;
-        background: #fff;
       }
 
-      /* Empty space for project photo */
-      .card-photo {
-        height: 120px;
-        background: #ddd;
-        border-bottom: 1px dashed #aaa;
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size: 26px 26px;
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 56px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .avatar-wrap {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        flex-shrink: 0;
+      }
+
+      .avatar-ring {
+        position: absolute;
+        inset: -10px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .avatar {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid rgba(255, 255, 255, 0.15);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .avatar-fallback {
+        display: none;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        font-size: 56px;
+        font-weight: 700;
+        color: var(--white);
+        background: linear-gradient(135deg, var(--forest-500), var(--forest-700));
+        border: 4px solid rgba(255, 255, 255, 0.15);
+        box-shadow: var(--shadow-lg);
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      .hero-eyebrow {
+        color: var(--forest-400);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 13px;
+        margin-bottom: 14px;
+      }
+
+      .hero h1 {
+        color: var(--white);
+        font-size: clamp(32px, 5vw, 52px);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 14px;
+      }
+
+      .hero-tagline {
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 17px;
+        max-width: 560px;
+        margin-bottom: 28px;
+      }
+
+      .hero-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 32px;
+      }
+
+      .pill {
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        padding: 6px 14px;
+        border-radius: 999px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      }
+
+      .btn-primary {
+        background: var(--forest-400);
+        color: var(--forest-950);
+      }
+      .btn-primary:hover {
+        background: #57b47b;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(72, 160, 109, 0.35);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--white);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 700px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+          text-align: center;
+          justify-items: center;
+        }
+        .hero-pills, .hero-actions {
+          justify-content: center;
+        }
+      }
+
+      /*About Section*/
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .about-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+      }
+
+      .about-card p + p {
+        margin-top: 14px;
+      }
+      .about-card p {
+        color: var(--muted);
+        font-size: 15.5px;
+      }
+
+      .fact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .fact {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        box-shadow: var(--shadow);
+      }
+
+      .fact-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: var(--forest-100);
+        color: var(--forest-600);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #888;
-        font-size: 12px;
+        flex-shrink: 0;
       }
 
-      .card-text {
-        padding: 14px;
-      }
-      .card-text h3 {
-        font-size: 16px;
-        margin-bottom: 6px;
-      }
-      .card-text p {
+      .fact strong {
+        display: block;
         font-size: 14px;
-        color: #555;
+        color: var(--forest-900);
+      }
+      .fact span {
+        font-size: 13.5px;
+        color: var(--muted);
       }
 
-      /* ---------- MOBILE: stack cards vertically ---------- */
-      @media (max-width: 640px) {
+      @media (max-width: 800px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /*Experience*/
+      .timeline {
+        position: relative;
+        padding-left: 32px;
+        border-left: 2px solid var(--forest-100);
+      }
+
+      .tl-item {
+        position: relative;
+        padding-bottom: 40px;
+      }
+      .tl-item:last-child {
+        padding-bottom: 0;
+      }
+
+      .tl-dot {
+        position: absolute;
+        left: -41px;
+        top: 4px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--forest-500);
+        border: 3px solid var(--cream);
+        box-shadow: 0 0 0 2px var(--forest-200, var(--forest-100));
+      }
+
+      .tl-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 22px 26px;
+        box-shadow: var(--shadow);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .tl-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .tl-head {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+
+      .tl-role {
+        font-weight: 700;
+        font-size: 16.5px;
+        color: var(--forest-900);
+      }
+
+      .tl-date {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--forest-600);
+        background: var(--forest-100);
+        padding: 3px 10px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+
+      .tl-org {
+        font-size: 14px;
+        color: var(--muted);
+        margin-bottom: 12px;
+        font-weight: 500;
+      }
+
+      .tl-card ul {
+        margin-left: 18px;
+        color: var(--muted);
+        font-size: 14.5px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      /*Education*/
+      .edu-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .edu-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        border-top: 4px solid var(--forest-500);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .edu-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .edu-card h3 {
+        font-size: 16px;
+        color: var(--forest-900);
+        margin-bottom: 4px;
+      }
+      .edu-card .edu-school {
+        font-size: 13.5px;
+        color: var(--forest-600);
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .edu-card .edu-meta {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+      .edu-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .edu-badge {
+        font-size: 11.5px;
+        background: var(--forest-100);
+        color: var(--forest-700);
+        padding: 4px 9px;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+
+      @media (max-width: 800px) {
+        .edu-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /*Skills*/
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .skill-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .skill-card h3 {
+        font-size: 15px;
+        color: var(--forest-900);
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        font-size: 12.5px;
+        font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 8px;
+        background: var(--forest-100);
+        color: var(--forest-700);
+        transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      }
+      .tag:hover {
+        background: var(--forest-500);
+        color: var(--white);
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 800px) {
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /*My projects*/
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+      }
+
+      .card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .card-top {
+        height: 8px;
+        background: linear-gradient(90deg, var(--forest-400), var(--forest-700));
+      }
+
+      .card-body {
+        padding: 26px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card-tag {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+
+      .card-body h3 {
+        font-size: 18px;
+        color: var(--forest-900);
+        margin-bottom: 10px;
+      }
+
+      .card-body p {
+        font-size: 14.5px;
+        color: var(--muted);
+        flex: 1;
+        margin-bottom: 18px;
+      }
+
+      .card-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 18px;
+      }
+
+      .card-tools span {
+        font-size: 11.5px;
+        background: var(--forest-100);
+        color: var(--forest-700);
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+
+      .card-btn {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--forest-900);
+        color: var(--white);
+        border: none;
+        padding: 10px 18px;
+        border-radius: 9px;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s ease, gap 0.2s ease;
+      }
+      .card-btn:hover {
+        background: var(--forest-600);
+        gap: 10px;
+      }
+
+      @media (max-width: 700px) {
         .cards {
           grid-template-columns: 1fr;
         }
+      }
+
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(8, 20, 14, 0.65);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 500;
+        padding: 24px;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+      .modal-backdrop.open {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal {
+        background: var(--white);
+        border-radius: 18px;
+        max-width: 560px;
+        width: 100%;
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 34px;
+        position: relative;
+        transform: translateY(20px) scale(0.98);
+        transition: transform 0.25s ease;
+        box-shadow: var(--shadow-lg);
+      }
+      .modal-backdrop.open .modal {
+        transform: translateY(0) scale(1);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: none;
+        background: var(--forest-100);
+        color: var(--forest-700);
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-close:hover {
+        background: var(--forest-500);
+        color: var(--white);
+      }
+
+      .modal .card-tag {
+        margin-bottom: 6px;
+      }
+      .modal h3 {
+        font-size: 22px;
+        color: var(--forest-900);
+        margin-bottom: 14px;
+      }
+      .modal ul {
+        margin: 16px 0 0 18px;
+        color: var(--muted);
+        font-size: 14.5px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .modal p {
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      /*Some Awards*/
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .info-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .info-card h3 {
+        font-size: 16px;
+        color: var(--forest-900);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .info-list li {
+        list-style: none;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        font-size: 14.5px;
+        color: var(--muted);
+      }
+      .info-list li::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--forest-500);
+        margin-top: 7px;
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 800px) {
+        .split {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /*Contact Section*/
+      .contact-section {
+        background: linear-gradient(160deg, var(--forest-950), var(--forest-800));
+        color: var(--white);
+      }
+
+      .contact-inner {
+        text-align: center;
+        max-width: 620px;
+        margin: 0 auto;
+      }
+
+      .contact-section .eyebrow {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--forest-400);
+      }
+
+      .contact-inner h2 {
+        font-size: clamp(26px, 4vw, 36px);
+        margin-bottom: 14px;
+      }
+
+      .contact-inner p {
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 32px;
+      }
+
+      .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .contact-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 22px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      .contact-links a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .contact-links a.primary {
+        background: var(--forest-400);
+        color: var(--forest-950);
+        border-color: transparent;
+      }
+      .contact-links a.primary:hover {
+        background: #57b47b;
+      }
+
+      footer {
+        text-align: center;
+        padding: 26px 24px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.45);
+        background: var(--forest-950);
+      }
+
+      /*Back to the top of the page*/
+      .to-top {
+        position: fixed;
+        bottom: 26px;
+        right: 26px;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--forest-600);
+        color: var(--white);
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+        z-index: 150;
+      }
+      .to-top.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+      .to-top:hover {
+        background: var(--forest-500);
       }
     </style>
   </head>
 
   <body>
-    <div class="container">
-      <!-- ============================================================
-         HEADER: photo, name, experiences
-         ============================================================ -->
-      <header>
-        <!-- Replace this div with <img src="your-photo.jpg" class="photo"> -->
-        <div class="photo">Photo</div>
-
-        <h1>Alek Blain-Rogers</h1>
-        <p>Business Analyst · SQL · Python · Tableau</p>
-      </header>
-
-      <!-- ============================================================
-         TABS
-         ============================================================ -->
-      <div class="tabs">
-        <button class="tab-button active" onclick="showTab('about')">
-          About Me
+    
+    <nav>
+      <div class="nav-inner">
+        <a href="#top" class="brand">Alek <span>Blain-Rogers</span></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
         </button>
-        <button class="tab-button" onclick="showTab('projects')">
-          Projects
-        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
+    </nav>
 
-      <!-- ---------- TAB 1: ABOUT ME ---------- -->
-      <div id="about" class="tab-content active">
-        <div class="panel">
-          <p>
-            I am a motivated individual that loves analytics and endurance sports.
+    <header class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="avatar-wrap">
+          <div class="avatar-ring"></div>
+      
+          <img
+            src="images/profile.jpg"
+            alt="Alek Blain-Rogers"
+            class="avatar"
+            id="avatarImg"
+            onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';"
+          />
+          <div class="avatar-fallback" id="avatarFallback">ABR</div>
+        </div>
+
+        <div>
+          <p class="hero-eyebrow">Analytics &amp; Data Visualization · McGill MMA Candidate</p>
+          <h1>Alek Blain-Rogers</h1>
+          <p class="hero-tagline">
+            I'm interested in analytics, ERP systems, and data visualization and using
+            them to help organizations succeed. Outside of work, you'll find me outdoors.
           </p>
+          <div class="hero-pills">
+            <span class="pill">Bilingual (EN/FR)</span>
+            <span class="pill">Data Visualization</span>
+            <span class="pill">ERP Systems (SAP)</span>
+            <span class="pill">Road Cycling</span>
+          </div>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+          </div>
         </div>
       </div>
+    </header>
 
-      <!-- ---------- TAB 2: PROJECTS ---------- -->
-      <div id="projects" class="tab-content">
+    <!--About Me Section-->
+    <section id="about">
+      <div class="container">
+        <span class="eyebrow reveal">About Me</span>
+        <h2 class="section-title reveal">A little about my background</h2>
+        <p class="section-sub reveal">
+          Curious, disciplined, and willing to learn.
+        </p>
+
+        <div class="about-grid">
+          <div class="about-card reveal">
+            <p>
+              I'm a curious and driven analytics student who thrives on solving hard,
+              ambiguous problems with data. My background spans financial analysis,
+              applied research, and business technology.
+            </p>
+            <p>
+              I'm currently pursuing a Master's in Management Analytics at McGill
+              University, building on a business administration degree focused on
+              data analytics and business technology. My goal is to build a career
+              at the intersection of analytics and business strategy.
+            </p>
+            <p>
+              Outside of work, I'm an avid cyclist and endurance athlete, road
+              racing, criteriums, duathlons, and half marathons keep me sharp and
+              disciplined, values I bring back into how I approach my work.
+            </p>
+          </div>
+
+          <div class="fact-list reveal">
+            <div class="fact">
+              <div class="fact-icon">🌐</div>
+              <div>
+                <strong>Languages</strong>
+                <span>Fluent in English and French</span>
+              </div>
+            </div>
+            <div class="fact">
+              <div class="fact-icon">🎓</div>
+              <div>
+                <strong>Currently</strong>
+                <span>M.M.A Candidate, McGill University</span>
+              </div>
+            </div>
+            <div class="fact">
+              <div class="fact-icon">📍</div>
+              <div>
+                <strong>Based in</strong>
+                <span>Montreal, Quebec, Canada</span>
+              </div>
+            </div>
+            <div class="fact">
+              <div class="fact-icon">🚴</div>
+              <div>
+                <strong>Beyond work</strong>
+                <span>Competitive cycling &amp; endurance sports</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Experience-->
+    <section id="experience" style="background: var(--white);">
+      <div class="container">
+        <span class="eyebrow reveal">Experience</span>
+        <h2 class="section-title reveal">Where I've worked</h2>
+        <p class="section-sub reveal">
+          A mix of research, finance, and analytics roles across academia and industry.
+        </p>
+
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <span class="tl-role">Research Assistant</span>
+                <span class="tl-date">Apr 2025 – Apr 2026</span>
+              </div>
+              <div class="tl-org">Bishop's University, Sherbrooke, QC</div>
+              <ul>
+                <li>Support an AI &amp; team management dynamics research project</li>
+                <li>Lead secondary data collection across academic and industry sources</li>
+                <li>Conduct data analysis to support research findings</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <span class="tl-role">Thales Junior Scientist</span>
+                <span class="tl-date">Apr 2025 – Aug 2025</span>
+              </div>
+              <div class="tl-org">MITACS, Quebec, QC</div>
+              <ul>
+                <li>Built an in-depth business research plan for a machine-learning product, covering pricing, bid-agreement structure, and marketing strategy</li>
+                <li>Conducted primary research through interviews and stakeholder meetings</li>
+                <li>Delivered frequent project presentations to stakeholders</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <span class="tl-role">Teaching Assistant</span>
+                <span class="tl-date">Sep 2024 – Apr 2026</span>
+              </div>
+              <div class="tl-org">Bishop's University, Sherbrooke, QC</div>
+              <ul>
+                <li>Supported Management IS, Marketing Analytics, and Business Applications of AI courses</li>
+                <li>Graded exams and assisted students with course material</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <span class="tl-role">Financial Analyst / Project Development Intern</span>
+                <span class="tl-date">May 2024 – Dec 2024</span>
+              </div>
+              <div class="tl-org">Bay Builders, North Bay, ON</div>
+              <ul>
+                <li>Completed the business plan for a $50M condominium development, now shovel-ready</li>
+                <li>Performed detailed market, demographic, and pricing analysis</li>
+                <li>Built an automated modular costing tool and ran commercial/residential rental cashflow analysis</li>
+                <li>Designed and analyzed a 200+ respondent housing needs survey; assisted a bank investment pitch</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <span class="tl-role">CO-OP Assurance</span>
+                <span class="tl-date">May 2023 – Aug 2023</span>
+              </div>
+              <div class="tl-org">BDO, North Bay, ON</div>
+              <ul>
+                <li>Filed income and corporate tax returns</li>
+                <li>Drafted CRA correspondence and facilitated client interactions</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <span class="tl-role">CO-OP Accounting Assistant</span>
+                <span class="tl-date">Feb 2021 – Jul 2021</span>
+              </div>
+              <div class="tl-org">RONA Inc., North Bay, ON</div>
+              <ul>
+                <li>Supported payroll, merchandising, and accounts receivable/payable</li>
+                <li>Managed supplier invoice filing and A/R follow-up</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Education-->
+    <section id="education">
+      <div class="container">
+        <span class="eyebrow reveal">Education</span>
+        <h2 class="section-title reveal">Academic background</h2>
+        <p class="section-sub reveal">Consistently on the honour roll, from high school through university.</p>
+
+        <div class="edu-grid">
+          <div class="edu-card reveal">
+            <h3>Master's of Management in Analytics (M.M.A)</h3>
+            <div class="edu-school">McGill University, Montreal, QC</div>
+            <div class="edu-meta">Jul 2026 – Aug 2027 · In Progress</div>
+            <div class="edu-badges"><span class="edu-badge">In Progress</span></div>
+          </div>
+
+          <div class="edu-card reveal">
+            <h3>Bachelor of Business Administration</h3>
+            <div class="edu-school">Bishop's University, Sherbrooke, QC</div>
+            <div class="edu-meta">Concentration: Business Technology &amp; Data Analytics · 3.7 GPA</div>
+            <div class="edu-badges">
+              <span class="edu-badge">Academic Honour Roll</span>
+              <span class="edu-badge">2022 – 2026</span>
+            </div>
+          </div>
+
+          <div class="edu-card reveal">
+            <h3>Ontario Secondary School Diploma</h3>
+            <div class="edu-school">École Secondaire Catholique Algonquin, North Bay, ON</div>
+            <div class="edu-meta">4.0 GPA · Certified Bilingual Diploma (FR/EN)</div>
+            <div class="edu-badges">
+              <span class="edu-badge">Academic Honour Roll</span>
+              <span class="edu-badge">SHSM Business</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Skills-->
+    <section id="skills" style="background: var(--white);">
+      <div class="container">
+        <span class="eyebrow reveal">Skills</span>
+        <h2 class="section-title reveal">Tools &amp; strengths</h2>
+        <p class="section-sub reveal">Software and skills I use to turn data into decisions.</p>
+
+        <div class="skills-grid">
+          <div class="skill-card reveal">
+            <h3>📊 Analytics &amp; BI</h3>
+            <div class="tag-row">
+              <span class="tag">Power BI</span>
+              <span class="tag">Tableau</span>
+              <span class="tag">KNIME</span>
+              <span class="tag">SurveyMonkey</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3>💼 Finance &amp; Accounting</h3>
+            <div class="tag-row">
+              <span class="tag">Casewear</span>
+              <span class="tag">Taxprep</span>
+              <span class="tag">iFirm</span>
+              <span class="tag">Sage</span>
+              <span class="tag">APT</span>
+              <span class="tag">Dext</span>
+              <span class="tag">Coconstruct</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3>🧠 Strengths</h3>
+            <div class="tag-row">
+              <span class="tag">Bilingual (EN/FR)</span>
+              <span class="tag">Logical &amp; Objective</span>
+              <span class="tag">Self-Sufficient</span>
+              <span class="tag">Team Player</span>
+              <span class="tag">Detail-Oriented</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Projects-->
+    <section id="projects">
+      <div class="container">
+        <span class="eyebrow reveal">Projects</span>
+        <h2 class="section-title reveal">Selected work</h2>
+        <p class="section-sub reveal">A few projects from my academic and professional experience. Click a card to see the details.</p>
+
         <div class="cards">
           <!-- CARD 1 -->
-          <div class="card">
-            <div class="card-photo">Project Image</div>
-            <div class="card-text">
-              <h3>Project Title</h3>
-              <p>Short description of what you did and the tools you used.</p>
+          <div class="card reveal">
+            <div class="card-top"></div>
+            <div class="card-body">
+              <span class="card-tag">Real Estate Finance</span>
+              <h3>$50M Condominium Development Plan</h3>
+              <p>Built the full business plan behind a shovel-ready $50M condo development, from market sizing to bank pitch.</p>
+              <div class="card-tools"><span>Excel</span><span>Sage</span><span>Financial Modelling</span></div>
+              <button class="card-btn" onclick="openModal('m1')">Explore Project →</button>
             </div>
           </div>
 
           <!-- CARD 2 -->
-          <div class="card">
-            <div class="card-photo">Project Image</div>
-            <div class="card-text">
-              <h3>Project Title</h3>
-              <p>Short description of what you did and the tools you used.</p>
+          <div class="card reveal">
+            <div class="card-top"></div>
+            <div class="card-body">
+              <span class="card-tag">Applied ML Research</span>
+              <h3>ML Product Go-to-Market Research</h3>
+              <p>Developed a business research plan for a machine-learning product, covering pricing and marketing strategy.</p>
+              <div class="card-tools"><span>Primary Research</span><span>Pricing Strategy</span></div>
+              <button class="card-btn" onclick="openModal('m2')">Explore Project →</button>
             </div>
           </div>
 
           <!-- CARD 3 -->
-          <div class="card">
-            <div class="card-photo">Project Image</div>
-            <div class="card-text">
-              <h3>Project Title</h3>
-              <p>Short description of what you did and the tools you used.</p>
+          <div class="card reveal">
+            <div class="card-top"></div>
+            <div class="card-body">
+              <span class="card-tag">Academic Research</span>
+              <h3>AI &amp; Team Management Dynamics</h3>
+              <p>Ongoing research support studying how AI adoption reshapes team management dynamics.</p>
+              <div class="card-tools"><span>Secondary Research</span><span>Data Analysis</span></div>
+              <button class="card-btn" onclick="openModal('m3')">Explore Project →</button>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="card reveal">
+            <div class="card-top"></div>
+            <div class="card-body">
+              <span class="card-tag">Capstone Project</span>
+              <h3>Dynamic Pricing Implementation</h3>
+              <p>Capstone project designing and implementing a dynamic pricing model as part of coursework.</p>
+              <div class="card-tools"><span>Analytics</span><span>Pricing Models</span></div>
+              <button class="card-btn" onclick="openModal('m4')">Explore Project →</button>
             </div>
           </div>
         </div>
       </div>
+    </section>
+
+    <section style="background: var(--white);">
+      <div class="container">
+        <span class="eyebrow reveal">Beyond the Resume</span>
+        <h2 class="section-title reveal">Awards &amp; activities</h2>
+        <p class="section-sub reveal">A quick look at recognition earned and how I spend time outside of work.</p>
+
+        <div class="split">
+          <div class="info-card reveal">
+            <h3>🏆 Awards &amp; Recognition</h3>
+            <ul class="info-list">
+              <li>8x Ronald Crowley Scholarship for high academic achievement</li>
+              <li>Bishop's Honour Society — club for high-achieving students</li>
+            </ul>
+          </div>
+
+          <div class="info-card reveal">
+            <h3>🚴 Extracurricular Activities</h3>
+            <ul class="info-list">
+              <li>O-Cup Road Races, Criterium Racing &amp; Track Cycling Certification</li>
+              <li>Numerous duathlons and half marathons</li>
+              <li>Ontario Provincial Basketball Tournaments</li>
+              <li>University intramurals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Contact-->
+    <section id="contact" class="contact-section">
+      <div class="container contact-inner">
+        <span class="eyebrow reveal">Contact</span>
+        <h2 class="reveal">Let's connect</h2>
+        <p class="reveal">
+          I'm always open to conversations about analytics, finance, and internship or
+          full-time opportunities. Reach out below.
+        </p>
+        <div class="contact-links reveal">
+          <a href="mailto:alekbr@icloud.com" class="primary">✉️ Email Me</a>
+          <a href="https://github.com/AlekBlain-Rogers" target="_blank" rel="noopener">🐙 GitHub</a>
+          <a href="https://www.linkedin.com/in/alek-blain-rogers-516794289" target="_blank" rel="noopener">💼 LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      &copy; <span id="year"></span> Alek Blain-Rogers. Built with HTML, CSS &amp; JavaScript.
+    </footer>
+
+    <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+    <div class="modal-backdrop" id="modalBackdrop">
+      <div class="modal" id="modalContent"></div>
     </div>
 
-    <!-- ============================================================
-       SIMPLE TAB SWITCHING SCRIPT
-       ============================================================ -->
     <script>
-      function showTab(id) {
-        // hide all tab contents
-        document.querySelectorAll(".tab-content").forEach(function (el) {
-          el.classList.remove("active");
-        });
-        // remove active state from all buttons
-        document.querySelectorAll(".tab-button").forEach(function (btn) {
-          btn.classList.remove("active");
-        });
-        // show the selected tab + highlight the clicked button
-        document.getElementById(id).classList.add("active");
-        event.target.classList.add("active");
+      const projects = {
+        m1: {
+          tag: "Real Estate Finance",
+          title: "$50M Condominium Development Plan",
+          body: "As Financial Analyst / Project Development Intern at Bay Builders, I completed the full business plan for a $50 million condominium development, now in its final stages and shovel-ready.",
+          bullets: [
+            "Performed detailed analysis of project needs, demographics, optimum unit size, and selling price",
+            "Conducted historical condominium sales research to benchmark pricing",
+            "Performed commercial and residential rental cashflow analysis",
+            "Designed and analyzed a survey of 200+ respondents on local housing needs",
+            "Built an automated modular costing tool used across the project",
+            "Assisted in preparing and delivering a bank investment project pitch",
+          ],
+        },
+        m2: {
+          tag: "Applied ML Research",
+          title: "ML Product Go-to-Market Research",
+          body: "As a Thales Junior Scientist through MITACS, I created an in-depth business research plan for a machine-learning related product.",
+          bullets: [
+            "Developed pricing strategy and bid-agreement structuring",
+            "Built out marketing strategy recommendations",
+            "Conducted primary research through interviews and stakeholder meetings",
+            "Delivered frequent project presentations to the research team",
+          ],
+        },
+        m3: {
+          tag: "Academic Research",
+          title: "AI & Team Management Dynamics",
+          body: "As a Research Assistant at Bishop's University, I support a project studying how AI adoption is reshaping team management dynamics.",
+          bullets: [
+            "Lead secondary data collection from academic and industry sources",
+            "Perform data analysis to support research conclusions",
+            "Collaborate with faculty researchers on ongoing findings",
+          ],
+        },
+        m4: {
+          tag: "Capstone Project",
+          title: "Dynamic Pricing Implementation",
+          body: "A capstone project focused on designing and implementing a dynamic pricing model, applying analytics coursework to a practical pricing problem.",
+          bullets: [
+            "Explored demand-responsive pricing logic",
+            "Applied analytics tools covered across coursework",
+            "Presented findings and pricing recommendations",
+          ],
+        },
+      };
+
+      function openModal(id) {
+        const p = projects[id];
+        const content = document.getElementById("modalContent");
+        content.innerHTML = `
+          <button class="modal-close" onclick="closeModal()">&times;</button>
+          <span class="card-tag">${p.tag}</span>
+          <h3>${p.title}</h3>
+          <p>${p.body}</p>
+          <ul>${p.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>
+        `;
+        document.getElementById("modalBackdrop").classList.add("open");
       }
+
+      function closeModal() {
+        document.getElementById("modalBackdrop").classList.remove("open");
+      }
+
+      document.getElementById("modalBackdrop").addEventListener("click", function (e) {
+        if (e.target === this) closeModal();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeModal();
+      });
+
+      /*mobile nav toggle*/
+      const navToggle = document.getElementById("navToggle");
+      const navLinks = document.getElementById("navLinks");
+      navToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
+      navLinks.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => navLinks.classList.remove("open"))
+      );
+
+      /*active nav link on scroll*/
+      const sections = document.querySelectorAll("section[id]");
+      const navA = document.querySelectorAll(".nav-links a");
+      const navObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navA.forEach((a) => a.classList.remove("active"));
+              const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+              if (active) active.classList.add("active");
+            }
+          });
+        },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      sections.forEach((s) => navObserver.observe(s));
+
+      /*reveal on scroll*/
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+      /*back to top*/
+      const toTop = document.getElementById("toTop");
+      window.addEventListener("scroll", () => {
+        toTop.classList.toggle("show", window.scrollY > 500);
+      });
+      toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+      /*footer year*/
+      document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
